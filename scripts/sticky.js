@@ -25,10 +25,7 @@ class Sticky {
       });
     });
 
-    this.state = {
-      numberOfElements: num,
-      sticky: false
-    };
+    this.sticky = false;
 
     this.toggler.addEventListener('click', () => this.toggleState());
     this.scroll = this.throttle(this.startFixedHedersScroll.bind(this));
@@ -36,8 +33,8 @@ class Sticky {
 
 
   toggleState () {
-    this.state.sticky = !(this.state.sticky);
-    this.state.sticky ? this.initialize() : this.disable();
+    this.sticky = !(this.sticky);
+    this.sticky ? this.initialize() : this.disable();
   }
 
   initialize () {
