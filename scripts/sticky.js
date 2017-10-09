@@ -31,7 +31,7 @@ class Sticky {
     };
 
     this.toggler.addEventListener('click', () => this.toggleState());
-    this.scroll = this.startFixedHedersScroll.bind(this);
+    this.scroll = this.throttle(this.startFixedHedersScroll.bind(this));
   }
 
 
@@ -42,7 +42,7 @@ class Sticky {
 
   initialize () {
     this.toggler.innerHTML = 'Disable sticky headers';
-    document.addEventListener('scroll', this.throttle(this.scroll));
+    document.addEventListener('scroll', this.scroll);
     alert('The headers are sticky now. Scroll down to check out! 😎');
   }
 
