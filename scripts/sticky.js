@@ -1,19 +1,15 @@
 class Sticky {
-  constructor (selector, num) {
+  constructor (stickyElement, blocksClass, containerId) {
 
     // Get root DOM element
-    this.main = document.querySelector(selector);
+    this.container = document.querySelector(containerId);
+    this.elements = document.querySelectorAll(blocksClass);
+    this.elementsHeader = this.container.querySelector(stickyElement);
+    this.toggler = document.querySelector('#toggler');
 
-    // Render boxes
-    this.render(num);
-
-    // Get the rest of DOM elements agter they've been rendered
-    this.elements = this.main.querySelectorAll('.block');
-    this.elementsHeader = this.main.querySelector('.mini-header');
-
-    // Get switcher and form DOM elements
-    this.interactive = document.querySelector('#interactive');
-    this.toggler = this.interactive.querySelector('#toggler');
+    window.addEventListener('resize', () => {
+      // TODO update elements dimentions
+    });
 
     this.grade = [];
     this.elements.forEach((element) => {
@@ -25,12 +21,12 @@ class Sticky {
       });
     });
 
+
     this.sticky = false;
 
     this.toggler.addEventListener('click', () => this.toggleState());
-    this.scroll = this.throttle(this.startFixedHedersScroll.bind(this));
+    this.scroll = this.throttle(this.handleContainerHeight.bind(this));
   }
-
 
   toggleState () {
     this.sticky = !(this.sticky);
@@ -49,46 +45,8 @@ class Sticky {
     alert('The headers aren\'t sticky anymore 😝');
   }
 
-  render (num) {
-    let boxes = [];
-    for (let i = 0; i < num; i++) {
-      boxes.push(
-        `<div id="div${i}" class="df block" data-id=${i}>
-            <h3 class="mini-header" style="background-color: ${this.colorPicker()}">
-              Header #${i+1}
-            </h3>
-            <div class="content">
-              Lorem ipsum sodales, sapien enim nec: auctor — integer curabitur
-              elementum quisque lorem morbi congue lorem malesuada ultricies.
-              Malesuada cursus duis quam lorem pharetra nam, risus justo fusce,
-              a massa amet congue adipiscing non. Diam quam metus malesuada et
-              amet gravida porta nibh non. Auctor quam elementum lorem justo
-              nulla arcu maecenas gravida pellentesque lectus at. Eget quam
-              elementum cursus quam rutrum, commodo elementum congue vitae leo
-              porta. Mauris at maecenas porttitor cursus ipsum, porttitor nam
-              et lectus porttitor, sodales malesuada — eros porta.
-            </div>
-          </div>`
-      );
-    }
-
-    this.main.innerHTML = boxes.join('');
-  }
-
-  colorPicker () {
-    const r = this.getRandomNumber();
-    const g = this.getRandomNumber();
-    const b = this.getRandomNumber();
-
-    return `rgb(${r},${g},${b})`;
-  }
-
-  getRandomNumber () {
-    return Math.floor(Math.random()*256);
-  }
-
   // Throttling function
-  throttle (callback, wait = 10, context = this) {
+  throttle (callback, wait = 20, context = this) {
     let timeout = null;
     let callbackArgs = null;
 
@@ -116,7 +74,7 @@ class Sticky {
       return element;
     });
 
-    this.activeElementStyleChange(this.grade);
+    this.activeElementStyleChange();
   }
 
   activeElementStyleChange () {
@@ -130,14 +88,14 @@ class Sticky {
     });
   }
 
-  startFixedHedersScroll () {
+  handleContainerHeight () {
     this.activeElement();
-    if (window.scrollY >= this.main.offsetTop) {
-      this.main.style.paddingTop = (this.elementsHeader.offsetHeight) + 'px';
+    if (window.scrollY >= this.container.offsetTop) {
+      this.container.style.paddingTop = (this.elementsHeader.offsetHeight) + 'px';
     } else {
-      this.main.style.paddingTop = 0;
+      this.container.style.paddingTop = 0;
     }
   }
 }
 
-const sticky = new Sticky('#container', 100);
+const sticky = new Sticky('.mini-header', '.block', '#container');
