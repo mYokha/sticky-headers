@@ -3,7 +3,7 @@ function render (num) {
   let boxes = [];
   for (let i = 0; i < num; i++) {
     boxes.push(
-      `<div id="div${i}" class="df block" data-id=${i}>
+      `<div class="df block" data-id=${i}>
           <h3 class="mini-header" style="background-color: ${colorPicker()}">
             Header #${i+1}
           </h3>

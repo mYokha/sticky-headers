@@ -1,15 +1,11 @@
 class Sticky {
   constructor (stickyElement, blocksClass, containerId) {
 
-    // Get root DOM element
+    // Get DOM elements
     this.container = document.querySelector(containerId);
     this.elements = document.querySelectorAll(blocksClass);
     this.elementsHeader = this.container.querySelector(stickyElement);
     this.toggler = document.querySelector('#toggler');
-
-    window.addEventListener('resize', () => {
-      // TODO update elements dimentions
-    });
 
     this.grade = [];
     this.elements.forEach((element) => {
@@ -21,11 +17,22 @@ class Sticky {
       });
     });
 
-
     this.sticky = false;
 
     this.toggler.addEventListener('click', () => this.toggleState());
-    this.scroll = this.throttle(this.handleContainerHeight.bind(this));
+    window.addEventListener('resize', () => {
+      // TODO update elements dimentions
+      this.updateGrade();
+      this.handleStart();
+    });
+    this.scroll = this.throttle(this.handleStart.bind(this));
+  }
+
+  updateGrade (){
+    this.grade.forEach((element, i) => {
+      element.top = this.elements[i].offsetTop;
+      element.height = this.elements[i].offsetHeight;
+    });
   }
 
   toggleState () {
@@ -88,7 +95,7 @@ class Sticky {
     });
   }
 
-  handleContainerHeight () {
+  handleStart () {
     this.activeElement();
     if (window.scrollY >= this.container.offsetTop) {
       this.container.style.paddingTop = (this.elementsHeader.offsetHeight) + 'px';
