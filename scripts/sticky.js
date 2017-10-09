@@ -88,7 +88,7 @@ class Sticky {
   }
 
   // Throttling function
-  throttle (callback, wait = 40, context = this) {
+  throttle (callback, wait = 10, context = this) {
     let timeout = null;
     let callbackArgs = null;
 
