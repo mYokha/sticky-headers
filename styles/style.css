@@ -1,0 +1,146 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/**************End of resetter*******************/
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #555;
+  color: #fff;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  width: 100%;
+  padding: 2em;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+#container, .block {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+#interactive {
+  padding: 2em;
+  justify-content: space-around;
+}
+
+button, input {
+  background-color: #fff;
+  border: 1px solid #aaa;
+  padding: 1em;
+}
+
+button:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: #ddd;
+}
+
+#toggler {
+  width: 13em;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.block {
+  padding-bottom: 25px;
+}
+
+.df {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.mini-header {
+  text-align: center;
+  padding: 2em;
+}
+
+.fixed-head .mini-header {
+  position: fixed;
+  top: 0;
+}
+
+@media only screen and (max-width: 720px) {
+  #container, .mini-header {
+    width: 90vw;
+  }
+}
+
+@media only screen and (min-width: 721px) {
+  #container, .mini-header {
+    width: 70vw;
+  }
+}
+
+@media only screen and (min-width: 1141px) {
+  #container, .mini-header {
+    width: 50vw;
+  }
+}

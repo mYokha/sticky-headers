@@ -1,0 +1,15 @@
+{
+  "name": "sticky-header",
+  "version": "1.0.0",
+  "description": "This is a test app representing sticky headres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mYokha/sticky-headers.git"
+  },
+  "author": "max yokha",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^4.8.0"
+  },
+  "dependencies": {}
+}
