@@ -1,10 +1,10 @@
 class Sticky {
-  constructor (stickyElement, blocksClass, containerId) {
+  constructor (stickyElement) {
 
     // Get DOM elements
-    this.container = document.querySelector(containerId);
-    this.elements = document.querySelectorAll(blocksClass);
-    this.elementsHeader = this.container.querySelector(stickyElement);
+    this.headers = document.querySelectorAll(stickyElement);
+    this.container = this.headers[0].parentElement.parentElement;
+    this.elements = document.querySelectorAll('.block');
     this.toggler = document.querySelector('#toggler');
 
     this.grade = [];
@@ -96,13 +96,13 @@ class Sticky {
   }
 
   handleStart () {
-    this.activeElement();
     if (window.scrollY >= this.container.offsetTop) {
-      this.container.style.paddingTop = (this.elementsHeader.offsetHeight) + 'px';
+      this.container.style.paddingTop = (this.headers[0].offsetHeight) + 'px';
     } else {
       this.container.style.paddingTop = 0;
     }
+    this.activeElement();
   }
 }
 
-const sticky = new Sticky('.mini-header', '.block', '#container');
+const sticky = new Sticky('.mini-header');
