@@ -15,22 +15,22 @@ class Sticky {
     window.addEventListener('resize', () => {
       console.log('\nwindow resized');
       // TODO update elements dimentions
-      //this.updateGrade();
-      //this.handleStart();
-      console.log('container offsetTop: ' + this.container.offsetTop);
-      console.log('top: ' + this.elements[0].offsetTop + '\nheight:' + this.elements[0].offsetHeight);
-    });
-    this.scroll = utils.throttle(this.handleStart.bind(this));
-  }
+      /*function ready(fn) {
+        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
+          fn();
+        } else {
+          document.addEventListener('DOMContentLoaded', fn);
+        }
+      }*/
 
-  updateGrade (){
-    console.log('updateGrade ran!');
-    this.mantainer.height = this.header.offsetHeight;
-    /*this.elements.forEach((element) => {
-      console.log(element);
-      element.top = element.offsetTop;
-      element.height = element.offsetHeight;
-    });*/
+      document.querySelectorAll('.block').forEach((element) => {
+        element.dataset.top = element.offsetTop;
+        element.dataset.height = element.offsetHeight;
+      });
+      this.container.style.paddingTop = this.header.dataset.height + 'px';
+    });
+
+    this.scroll = utils.throttle(this.handleStart.bind(this));
   }
 
   toggleState () {
@@ -53,7 +53,7 @@ class Sticky {
   activeElement () {
     for (var i = 0; i < this.elements.length; i++) {
       if ((window.scrollY >= this.elements[i].dataset.top)
-      && (window.scrollY < this.elements[i+1].dataset.top)) {
+      && (window.scrollY < this.elements[i + 1].dataset.top)) {
         this.elements[i].dataset.active = true;
       } else {
         this.elements[i].dataset.active = false;
@@ -63,13 +63,9 @@ class Sticky {
 
   handleStart () {
     if (window.scrollY >= this.container.offsetTop){
-      console.log(this.mantainer);
-      console.log(this.header);
-      this.mantainer.height = this.header.offsetHeight;
+      this.container.style.paddingTop = this.header.offsetHeight + 'px';
     } else {
-      console.log(this.mantainer);
-      console.log(this.header);
-      this.mantainer.height = 0;
+      this.container.style.paddingTop = 0;
     }
     this.activeElement();
   }
