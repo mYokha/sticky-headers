@@ -63,15 +63,28 @@ button:active {
   flex-wrap: wrap;
 }
 
-.mini-header {
+
+.mini-header{
   text-align: center;
   padding: 2em;
 }
 
-.fixed-head .mini-header {
+#height-mantainer {
+  display: block;
+  visibility: hidden;
+}
+
+
+/*.fixed-head .mini-header {
+  position: fixed;
+  top: 0;
+}*/
+
+[data-active="true"] .mini-header {
   position: fixed;
   top: 0;
 }
+
 
 @media only screen and (max-width: 720px) {
   #container, .mini-header {
